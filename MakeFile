@@ -15,22 +15,12 @@ start-container:
 terminate-container:
 	(cd shell && CI_FLAG=$(CI_PLAT) sh ./terminate_container.sh) || (echo "terminate-container failed $$?"; exit 1)
 
-#docker-build: ## docker build
+${GRADLE_TASKS}:
+ifdef MODULE
+	./gradlew :$(MODULE):$@
+else
+	./gradlew $@
+endif
+clean: ## gradle clean
 
-
-
-#${GRADLE_TASKS}:
-#ifdef MODULE
-#	./gradlew :$(MODULE):$@
-#else
-#	./gradlew $@
-#endif
-
-#clean: ## gradle clean
-
-#test: clean ## gradle test
-
-#xxx: ## Test xxx
-	#echo 'xxx test'
-#target00: ## This message will show up when typing 'make help'
-#	@echo does nothing
+test: clean ## gradle test

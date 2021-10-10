@@ -23,6 +23,10 @@ jobs:
       run: chmod +x gradlew
     - name: start-Container
       run: CI_FLAG=test-actions make -f ./MakeFile start-container
+
+    - name: test-pull-request
+      run: CI_FLAG=test-actions make -f ./MakeFile test
+
     - name: terminate-Container
       run: CI_FLAG=test-actions make -f ./MakeFile terminate-container
 
