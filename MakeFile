@@ -9,8 +9,11 @@ GRADLE_TASKS = clean test build
 help: ## show help message
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m\033[0m\n"} /^[$$()% 0-9a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
-test-github:
+start-container:
 	(cd shell && CI_FLAG=$(CI_PLAT) sh ./run_container.sh) || (echo "run-container failed $$?"; exit 1)
+
+terminate-container:
+	(cd shell && CI_FLAG=$(CI_PLAT) sh ./terminate_container.sh) || (echo "terminate-container failed $$?"; exit 1)
 
 #docker-build: ## docker build
 
