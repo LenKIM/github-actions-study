@@ -1,3 +1,5 @@
+name: "github actions"
+
 on:
   pull_request:
     branches: [ master ]
@@ -23,7 +25,7 @@ jobs:
     - name: Start-Actions
       run: CI_PLAT=test-actions make test-github
 
-  image-push:
-    runs-on: ubuntu-latest
+#  image-push:
+#    runs-on: ubuntu-latest
     #- name: Test with Gradle
     #  run: ./gradlew --info test
