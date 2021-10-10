@@ -28,7 +28,6 @@ class UsersRepositoryTest {
     @Autowired
     private UsersRepository usersRepository;
 
-
     @Test
     @Rollback
     @SqlMergeMode(MERGE)
@@ -38,6 +37,23 @@ class UsersRepositoryTest {
             "INSERT INTO \"users\" (\"id\",\"user_name\") VALUES (997,'CCCC');"
     })
     void saveAndFind() {
+
+        Users users = Users.of("kim");
+        Users save = usersRepository.save(users);
+        Users found = usersRepository.findById(save.getId()).get();
+
+        Assertions.assertThat(found.getUserName()).isEqualTo(users.getUserName());
+    }
+
+    @Test
+    @Rollback
+    @SqlMergeMode(MERGE)
+    @Sql(statements = {
+            "INSERT INTO \"users\" (\"id\",\"user_name\") VALUES (999,'AAAA');",
+            "INSERT INTO \"users\" (\"id\",\"user_name\") VALUES (998,'BBBB');",
+            "INSERT INTO \"users\" (\"id\",\"user_name\") VALUES (997,'CCCC');"
+    })
+    void saveAndFind2() {
 
         Users users = Users.of("kim");
         Users save = usersRepository.save(users);
