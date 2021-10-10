@@ -1,0 +1,34 @@
+CI_PLAT ?= local
+
+## http://korea.gnu.org/manual/release/make/make-sjp/make-ko_toc.html
+.PHONY : help clean test
+.DEFAULT : xxx
+
+GRADLE_TASKS = clean test build
+
+help: ## show help message
+	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m\033[0m\n"} /^[$$()% 0-9a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+
+test-github:
+	CI_FLAG=$(CI_PLAT) sh .run_container.sh || (echo "run-container failed $$?"; exit 1)
+
+docker-build: ## docker build
+
+
+
+#${GRADLE_TASKS}:
+#ifdef MODULE
+#	./gradlew :$(MODULE):$@
+#else
+#	./gradlew $@
+#endif
+
+#clean: ## gradle clean
+
+#test: clean ## gradle test
+
+xxx: ## Test xxx
+	echo 'xxx test'
+
+target00: ## This message will show up when typing 'make help'
+	@echo does nothing
