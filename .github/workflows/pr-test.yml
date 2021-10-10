@@ -23,7 +23,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Start-Actions
-      run: CI_PLAT=test-actions make test-github
+      run: CI_PLAT=test-actions make -f ./makefile test-github
 
 #  image-push:
 #    runs-on: ubuntu-latest
