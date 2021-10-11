@@ -21,9 +21,15 @@ jobs:
     # gradlew 권한 부여
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    - name: start-Container
+      run: CI_FLAG=test-actions make -f ./MakeFile start-container
 
-    - name: Start-Actions
-      run: CI_PLAT=test-actions make test-github
+    - name: test-pull-request
+      run: CI_FLAG=test-actions make -f ./MakeFile test
+
+    - name: terminate-Container
+      run: CI_FLAG=test-actions make -f ./MakeFile terminate-container
+
 
 #  image-push:
 #    runs-on: ubuntu-latest

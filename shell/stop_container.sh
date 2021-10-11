@@ -1,1 +1,0 @@
-docker stop local-postgre
