@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static io.zonky.test.db.AutoConfigureEmbeddedDatabase.DatabaseType.POSTGRES;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD;
 import static org.springframework.test.context.jdbc.SqlMergeMode.MergeMode.MERGE;
 
@@ -60,5 +61,10 @@ class UsersRepositoryTest {
         Users found = usersRepository.findById(save.getId()).get();
 
         Assertions.assertThat(found.getUserName()).isEqualTo(users.getUserName());
+    }
+
+    @Test
+    void name() {
+        Assertions.fail("fail");
     }
 }
